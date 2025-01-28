@@ -8,10 +8,10 @@ class Piece:
     PADDING = 30
     BORDER = 15
     RADIUS = (Win_Config.SQUARE_SIZE // 2) - PADDING
-    P1_COLOR = Color.WHITE
-    P2_COLOR = Color.BLACK
-    PAWN_BORDER_COLOR = Color.SILVER
-    KING_BORDER_COLOR = Color.GOLD
+    P1_COLOR = Color.LIGHT_BLUE
+    P2_COLOR = Color.LIGHT_RED
+    PAWN_BORDER_COLOR = Color.DARK_GREEN
+    KING_BORDER_COLOR = Color.DARK_RED
 
     def __init__(self, row, col, color):
         self.row = row
