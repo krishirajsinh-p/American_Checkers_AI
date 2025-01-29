@@ -2,7 +2,7 @@ import pygame
 from checkers_env.win_config import Win_Config
 from checkers_env.piece import Piece
 from checkers_env.game import Game
-from checkers_env.minimax import minimax
+from checkers_env.minimax import Minimax
 
 window = pygame.display.set_mode((Win_Config.WINDOW_SIZE, Win_Config.WINDOW_SIZE))
 pygame.display.set_caption('Checkers')
@@ -14,6 +14,7 @@ def get_row_col_from_mouse(pos):
     return row, col
 
 def main():
+    minimax = Minimax()
     game = Game(window)
     clock = pygame.time.Clock()
     run = True
@@ -21,8 +22,7 @@ def main():
         clock.tick(Win_Config.FPS)
 
         if game.player == Piece.P1:
-            _, new_board = minimax(game.get_board(), 4, float('-inf'), float('inf'), True)
-            game.AI_action(new_board)
+            game.AI_action(minimax.get_best_move(game.board))
 
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -35,7 +35,6 @@ def main():
             
         game.update()
     pygame.quit()
-    print(game)
 
 if __name__ == '__main__':
     main()
