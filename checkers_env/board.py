@@ -200,6 +200,10 @@ class Board:
                 if piece != 0:
                     piece.draw(window)
 
+    def encode(self) -> str:
+        """Encode the board state as a string."""
+        return "".join([str(piece) for row in self.board for piece in row])
+
     def __str__(self) -> str:
         return "\n".join(["|".join([str(piece) for piece in row]) for row in self.board])
 
