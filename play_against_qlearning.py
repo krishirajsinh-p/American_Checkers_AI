@@ -2,6 +2,7 @@ import pygame
 import os
 import csv
 import random
+from copy import deepcopy
 from checkers_env.win_config import Win_Config
 from checkers_env.piece import Piece
 from checkers_env.game import Game
@@ -52,8 +53,9 @@ def ai_move(game, q_table):
     action = choose_best_action(q_table, state, valid_moves)
     if action:
         piece, move = valid_moves[action]
-        game.selected_piece = piece
-        game._move(*move)
+        board = deepcopy(game.get_board())
+        board.move_piece(piece, move[0], move[1])
+        game.AI_action(board)
 
 def main():
     pygame.init()
