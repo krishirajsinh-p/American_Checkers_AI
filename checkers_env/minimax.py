@@ -3,6 +3,11 @@ from .piece import Piece
 from .board import Board
 from copy import deepcopy
 
+def minimax_action(board: Board) -> Board:
+    """Get the best move for the AI using the minimax algorithm."""
+    _, new_board = minimax(board, 4, float('-inf'), float('inf'), True)
+    return new_board
+
 def minimax(board: Board, depth: int, alpha: float, beta: float, maximizing_player: bool) -> tuple[int, Board]:
     """Minimax algorithm with alpha-beta pruning to determine the best move for the AI."""
     if depth == 0 or board.winner() is not None:
