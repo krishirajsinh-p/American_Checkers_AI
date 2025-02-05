@@ -185,6 +185,10 @@ class Board:
 
     def evaluate(self) -> float:
         """Evaluate the board state for the AI."""
+        if self.p1_pawns + self.p1_kings == 0:
+            return 100
+        if self.p2_pawns + self.p2_kings == 0:
+            return -100
         return (self.p1_pawns - self.p2_pawns) + ((self.p1_kings - self.p2_kings) * 1.5)
 
     def get_piece(self, row: int, col: int) -> Piece | int:

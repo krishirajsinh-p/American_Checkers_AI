@@ -76,7 +76,6 @@ class Q_Learning:
         if skip:
             new_state.remove_pieces(skip)
 
-        reward = 50 if new_state.winner() == Piece.P1 else new_state.evaluate()
-        self.update_q_value(state, str((best_piece.row, best_piece.col, best_action)), reward, new_state)
+        self.update_q_value(state, str((best_piece.row, best_piece.col, best_action)), new_state.evaluate(), new_state)
 
         return new_state
