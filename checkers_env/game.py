@@ -84,7 +84,7 @@ class Game:
             pygame.draw.circle(window, Color.DARK_ORANGE, (col * Win_Config.SQUARE_SIZE + Win_Config.SQUARE_SIZE // 2, row * Win_Config.SQUARE_SIZE + Win_Config.SQUARE_SIZE // 2), 15)
 
     def __str__(self) -> str:
-        return str(self.board) + f"\nPlayer: {"P1" if self.player == Piece.P1 else "P2"}\nMoves: {self.moves}\nWinner: {"P1" if self.winner() == Piece.P1 else 'P2' if self.winner() == Piece.P2 else 'None'}"
+        return str(self.board) + f"\nPlayer: {'P1' if self.current_player == Piece.P1 else 'P2'}\nMoves: {self.moves}\nWinner: {'P1' if self.winner() == Piece.P1 else 'P2' if self.winner() == Piece.P2 else 'None'}"
     
     def __repr__(self) -> str:
         self.__str__()
