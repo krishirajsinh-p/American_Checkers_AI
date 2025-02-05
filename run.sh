@@ -14,4 +14,4 @@ fi
 export PYGAME_HIDE_SUPPORT_PROMPT="hide"
 
 # Run the game
-python3 play_against_minimax.py
+python3 play_against_qlearning.py
