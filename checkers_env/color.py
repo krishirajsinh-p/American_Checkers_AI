@@ -1,4 +1,5 @@
 class Color:
+    """Class to store the colors used in the game."""
     # for board
     BEIGE = (240, 217, 181)
     BROWN = (181, 136, 99)
@@ -11,8 +12,13 @@ class Color:
     DARK_GREEN = (0, 128, 0)
     DARK_RED = (139, 0, 0)
 
-    # other colors
+    # to show possible actions
+    DARK_ORANGE = (255, 140, 0)
+
+    # to indicate tie
     WHITE = (255, 255, 255)
+
+    # other colors
     BLACK = (0, 0, 0)
 
     LIGHT_GRAY = (211, 211, 211)
@@ -28,7 +34,6 @@ class Color:
     DARK_GRAY = (169, 169, 169)
     DARK_YELLOW = (255, 215, 0)
     DARK_PURPLE = (128, 0, 128)
-    DARK_ORANGE = (255, 140, 0)
     DARK_PINK = (255, 105, 180)
     DARK_CYAN = (0, 139, 139)
     DARK_LIME = (0, 255, 0)

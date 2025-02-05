@@ -4,6 +4,7 @@ from .color import Color
 from .piece import Piece
 
 class Board:
+    """Class to represent the game board."""
     BOARD_SIZE = ROW = COL = Win_Config.NO_OF_ROWS
     BOX_COLOR_1 = Color.BEIGE
     BOX_COLOR_2 = Color.BROWN
@@ -101,8 +102,8 @@ class Board:
                 if last:
                     # After a jump, we recursively check the further diagonals
                     row = r + step
-                    actions.update(self._traverse_left(row, max(row - 3, 0), step, color, left - 1, skipped=last))
-                    actions.update(self._traverse_right(row, max(row - 3, 0), step, color, left + 1, skipped=last))
+                    actions.update(self._traverse_left(row, max(row - 3, -1), step, color, left - 1, skipped=last))
+                    actions.update(self._traverse_right(row, max(row - 3, -1), step, color, left + 1, skipped=last))
                 break
             elif current.player == color:
                 # If the piece belongs to the same player, stop traversing
@@ -155,7 +156,7 @@ class Board:
         
         return actions
 
-    def get_all_pieces(self, color: tuple[int, int, int]) -> list[Piece]:
+    def get_all_pieces(self, color: Color) -> list[Piece]:
         """Get all the pieces of a given color."""
         pieces = []
         for row in self.board:
@@ -164,20 +165,21 @@ class Board:
                     pieces.append(piece)
         return pieces
 
-    def winner(self) -> tuple[int, int, int] | None:
+    def winner(self) -> Color | None:
+        """Return the winner of the game."""
         if self.p2_pawns + self.p2_kings <= 0:
             return Piece.P1
         elif self.p1_pawns + self.p1_kings <= 0:
             return Piece.P2
         p1_pieces = self.get_all_pieces(Piece.P1)
         p2_pieces = self.get_all_pieces(Piece.P2)
-        p1actions = any(self.get_actions(piece) for piece in p1_pieces)
-        p2actions = any(self.get_actions(piece) for piece in p2_pieces)
-        if not p1actions and not p2actions:
-            return Piece.P2 if self.evaluate() < 0 else Piece.P1
-        if not p1actions:
+        p1_actions = any(self.get_actions(piece) for piece in p1_pieces)
+        p2_actions = any(self.get_actions(piece) for piece in p2_pieces)
+        if not p1_actions and not p2_actions:
+            return Color.WHITE if self.evaluate() == 0 else (Piece.P2 if self.evaluate() < 0 else Piece.P1)
+        if not p1_actions:
             return Piece.P2
-        if not p2actions:
+        if not p2_actions:
             return Piece.P1
         return None
 
@@ -186,7 +188,7 @@ class Board:
         return (self.p1_pawns - self.p2_pawns) + ((self.p1_kings - self.p2_kings) * 1.5)
 
     def get_piece(self, row: int, col: int) -> Piece | int:
-        """Get the piece at a given position."""
+        """Get the piece at a given position or return 0 if empty."""
         return self.board[row][col]
 
     def draw(self, window: pygame.Surface) -> None:

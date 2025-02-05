@@ -3,6 +3,7 @@ from .win_config import Win_Config
 from .color import Color
 
 class Piece:
+    """Class to represent a piece on the board."""
     PADDING = 30
     BORDER = 15
     RADIUS = (Win_Config.SQUARE_SIZE // 2) - PADDING
@@ -11,20 +12,19 @@ class Piece:
     PAWN_BORDER = Color.DARK_GREEN
     KING_BORDER = Color.DARK_RED
 
-    def __init__(self, row: int, col: int, player: tuple[int, int, int]) -> None:
+    def __init__(self, row: int, col: int, player: Color) -> None:
         self.row = row
         self.col = col
         self.player = player
         self.border_color = self.PAWN_BORDER
         self.is_king = False
         self.x, self.y = self.calculate_position()
-        self.direction = 1 if self.player == self.P1 else -1
 
     def calculate_position(self) -> tuple[int, int]:
         """Calculate the pixel coordinates for the piece."""
         x = (Win_Config.SQUARE_SIZE * self.col) + (Win_Config.SQUARE_SIZE // 2)
         y = (Win_Config.SQUARE_SIZE * self.row) + (Win_Config.SQUARE_SIZE // 2)
-        return x, y
+        return (x, y)
 
     def move(self, row: int, col: int) -> None:
         """Move the piece to a new position and promote it if necessary."""
