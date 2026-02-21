@@ -10,14 +10,17 @@ def main():
     clock = pygame.time.Clock()
     
     game = Game(window)
-    q_learning = Q_Learning()
+    # Load pre-trained Q-learning model (epsilon=0 for pure exploitation, no exploration)
+    q_learning = Q_Learning(epsilon=0.0)
 
     run = True
     while run and game.winner() is None:
         clock.tick(Win_Config.FPS)
 
         if game.current_player == Piece.P1:
-            game.AI_move(q_learning.get_best_action(game.board))
+            # Get best action from trained Q-learning agent
+            new_board, _ = q_learning.get_best_action(game.board, is_training=False)
+            game.AI_move(new_board)
 
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
