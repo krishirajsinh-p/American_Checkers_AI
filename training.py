@@ -3,7 +3,7 @@ from checkers_env.game import Game
 from algorithm.minimax import Minimax
 from algorithm.q_learning import Q_Learning
 
-def train(episodes=2000) -> None:
+def train(episodes=5000) -> None:
     """Trains the Q Learning against the Minimax algorithm."""
     # Improved epsilon decay: use inverse decay instead of exponential
     epsilon_start = 0.8
@@ -18,8 +18,8 @@ def train(episodes=2000) -> None:
         epsilon = max(epsilon_end, epsilon)
         
         game = Game(None)
-        # Increased depth for stronger minimax opponent to better train the Q-learning agent
-        minimax = Minimax(depth=4)
+        # Increase depth for stronger minimax opponent to better train the Q-learning agent
+        minimax = Minimax(depth=2)
         q_learning = Q_Learning(alpha=0.15, gamma=0.95, epsilon=epsilon)
 
         while game.winner() is None:
@@ -69,4 +69,4 @@ def train(episodes=2000) -> None:
     print("="*60)
 
 if __name__ == "__main__":
-    train(episodes=2000)
+    train(episodes=5000)
